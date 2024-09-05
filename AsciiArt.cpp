@@ -235,6 +235,6 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
         std::cerr << "unknown exception\n";
     }
 
-//    std::cout << "EXIT" << std::endl;
+
     return result;
 }

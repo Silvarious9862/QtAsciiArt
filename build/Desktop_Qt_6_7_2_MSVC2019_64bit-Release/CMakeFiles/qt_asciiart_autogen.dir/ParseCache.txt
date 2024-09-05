@@ -4,10 +4,10 @@ D:/cppprog/qt_asciiart/BitmapFileHeader.h
 D:/cppprog/qt_asciiart/AsciiArt.h
 D:/cppprog/qt_asciiart/MatrixIterator.h
 D:/cppprog/qt_asciiart/Bitmap.h
-D:/cppprog/qt_asciiart/MatrixIterator.cpp
 D:/cppprog/qt_asciiart/PixArray.h
-D:/cppprog/qt_asciiart/symbols.cpp
+D:/cppprog/qt_asciiart/MatrixIterator.cpp
 D:/cppprog/qt_asciiart/BitmapInfoHeader.h
+D:/cppprog/qt_asciiart/symbols.cpp
 D:/cppprog/qt_asciiart/Luminance.h
 D:/cppprog/qt_asciiart/Pallette.h
 D:/cppprog/qt_asciiart/RGBtriple.h

@@ -65,7 +65,7 @@
           <string/>
          </property>
          <property name="text">
-          <string/>
+          <string> `.-':_,^=;&gt;&lt;+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&amp;@</string>
          </property>
          <property name="placeholderText">
           <string>Числа, буквы, специальные символы</string>
@@ -162,7 +162,7 @@
        <property name="font">
         <font>
          <family>Consolas</family>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
       </widget>

@@ -3,6 +3,7 @@
 #include <vector>
 #include "Bitmap.h"
 #include <exception>
+#include <chrono>
 
 void PrintMatrixAscii(std::vector<std::vector <char>> const& matrix);
 std::vector<std::vector<double>> CreateLightnessMatrix(Bitmap& image, std::vector<std::vector<double>>& matrix);

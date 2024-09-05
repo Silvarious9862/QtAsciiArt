@@ -31,7 +31,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_ButtonExplore_clicked()
 {
     QString filename = QFileDialog::getOpenFileName(this, tr("Open image"), "/", tr("Image file (*.bmp)"));
-    qDebug() << "filename is: " << filename << '\n';
+    qDebug() << "filename is: " << filename;
     ui->Path->setText(filename);
 }
 
@@ -75,6 +75,9 @@ void MainWindow::on_ButtonGenerate_clicked()
                                               "\n- Файл изображения поврежден или недоступен\n- Разрядность картинки не равна 24 бит");
         return;
     }
+    time_t sec;
+    sec = time(NULL);
+    qDebug() << "Art Done! " << std::asctime(std::localtime(&sec));
 
     QString qstr = QString::fromStdString(result);
 
@@ -82,6 +85,7 @@ void MainWindow::on_ButtonGenerate_clicked()
     ui->plainTextEdit->setFont(newfont);
     ui->plainTextEdit->setPlainText(qstr);
     ui->plainTextEdit->setFocus();
+
 
 }
 

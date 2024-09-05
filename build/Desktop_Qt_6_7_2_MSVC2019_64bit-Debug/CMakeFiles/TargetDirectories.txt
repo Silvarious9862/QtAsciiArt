@@ -1,0 +1,8 @@
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/qt_asciiart.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/edit_cache.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/rebuild_cache.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/list_install_components.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/install.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/install/local.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/qt_asciiart_autogen_timestamp_deps.dir
+D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MSVC2019_64bit-Debug/CMakeFiles/qt_asciiart_autogen.dir

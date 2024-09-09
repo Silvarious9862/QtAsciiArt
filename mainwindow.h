@@ -34,6 +34,12 @@ private slots:
 
     void on_ButtonCopy_clicked();
 
+    void on_zoomOut_clicked();
+
+    void on_zoomIn_clicked();
+
+    void on_plainTextEdit_textChanged();
+
 private:
     Ui::MainWindow *ui;
 };

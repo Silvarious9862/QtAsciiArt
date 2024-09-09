@@ -20,7 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->ButtonExplore->setFocus();
     ui->plainTextEdit->setPlaceholderText("Здесь будет ваш ASCII-Art");
     ui->plainTextEdit->setReadOnly(true);
-
+    ui->zoomIn->setEnabled(false);
+    ui->zoomOut->setEnabled(false);
+    ui->zoomValue->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -80,13 +82,16 @@ void MainWindow::on_ButtonGenerate_clicked()
     qDebug() << "Art Done! " << std::asctime(std::localtime(&sec));
 
     QString qstr = QString::fromStdString(result);
-
-    QFont newfont("Consolas", 1);
+    QFont newfont("Consolas", 2);
     ui->plainTextEdit->setFont(newfont);
     ui->plainTextEdit->setPlainText(qstr);
     ui->plainTextEdit->setFocus();
 
 
+    ui->zoomValue->setText("10%");
+    ui->zoomValue->setEnabled(true);
+    ui->zoomIn->setEnabled(true);
+    ui->zoomOut->setEnabled(true);
 }
 
 
@@ -94,5 +99,48 @@ void MainWindow::on_ButtonCopy_clicked()
 {
     ui->plainTextEdit->selectAll();
     ui->plainTextEdit->copy();
+}
+
+
+void MainWindow::on_zoomOut_clicked()
+{
+    QFontInfo fontinfo = ui->plainTextEdit->fontInfo();
+    if(fontinfo.pointSize()>1){
+        ui->plainTextEdit->zoomOut();
+        QString zoomValueStr = ui->zoomValue->text();
+        zoomValueStr.resize(zoomValueStr.size()-1);
+        int zoomValue = zoomValueStr.toInt();
+        zoomValue-=10;
+        zoomValueStr = zoomValueStr.fromStdString(std::to_string(zoomValue)+"%");
+        ui->zoomValue->setText(zoomValueStr);
+        if(zoomValue == 0)
+            ui->zoomOut->setEnabled(false);
+        if(zoomValue < 200) ui->zoomIn->setEnabled(true);
+    }
+
+}
+
+
+void MainWindow::on_zoomIn_clicked()
+{
+
+    QFontInfo fontinfo = ui->plainTextEdit->fontInfo();
+    if(fontinfo.pointSize()<21){
+        ui->plainTextEdit->zoomIn();
+        QString zoomValueStr = ui->zoomValue->text();
+        zoomValueStr.resize(zoomValueStr.size()-1);
+        int zoomValue = zoomValueStr.toInt();
+        zoomValue+=10;
+        zoomValueStr = zoomValueStr.fromStdString(std::to_string(zoomValue)+"%");
+        ui->zoomValue->setText(zoomValueStr);
+        if(zoomValue > 0 ) ui->zoomOut->setEnabled(true);
+        if(zoomValue == 200) ui->zoomIn->setEnabled(false);
+    }
+}
+
+
+void MainWindow::on_plainTextEdit_textChanged()
+{
+
 }
 

@@ -14,5 +14,5 @@ void setLightnessSymbols(std::vector<char>& symbolArray, std::vector<double>& sy
 void configureSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume);
 std::vector<std::vector<char>>   LightnessToAscii(std::vector<std::vector<double>>& matrix, std::vector<char> &symbolArray, std::vector<double> &symbolVolume);
 std::string MakeAsciiArt(std::string path, int quality, std::string symbols);
-std::string printResult(std::vector<std::vector<char>>& matrix_ascii);
+std::string printResult(std::vector<std::vector<char>>& matrix_ascii, int quality);
 #endif // ASCIIART_H

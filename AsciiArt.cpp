@@ -164,16 +164,26 @@ std::vector<std::vector<char>>LightnessToAscii(std::vector<std::vector<double>>&
     return matrix_ascii;
 }
 
-std::string printResult(std::vector<std::vector<char>>& matrix_ascii)
+std::string printResult(std::vector<std::vector<char>>& matrix_ascii, int quality)
 {
     std::string output_str;
-    for(auto& i : matrix_ascii){
-        for(auto& j : i) {
-            //output_str += ' ';
-            output_str += j;
+    //if(quality < 6) {
+        for(auto& i : matrix_ascii){
+            for(auto& j : i) {
+                output_str += ' ';
+                output_str += j;
 
+            }
         }
-    }
+    //}
+    /*else {
+        for(auto& i : matrix_ascii){
+            for(auto& j : i) {
+                output_str += j;
+
+            }
+        }
+    }*/
     return output_str;
 }
 
@@ -215,7 +225,7 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
         std::vector<std::vector<char>> matrix_ascii(0, std::vector<char>(0, 0));
         matrix_ascii = LightnessToAscii(matrix_avg, symbolArray, symbolVolume);
         
-        result = printResult(matrix_ascii);
+        result = printResult(matrix_ascii, quality);
 
     }
     catch (std::out_of_range& e) 

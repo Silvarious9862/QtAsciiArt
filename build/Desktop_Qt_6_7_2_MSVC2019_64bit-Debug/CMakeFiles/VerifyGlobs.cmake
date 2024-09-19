@@ -98,6 +98,7 @@ set(OLD_GLOB
   "D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/qt_asciiart_autogen/include/ui_mainwindow.h"
   "D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/qt_asciiart_autogen/moc_predefs.h"
   "D:/cppprog/qt_asciiart/mainwindow.h"
+  "D:/cppprog/qt_asciiart/mystack.h"
   "D:/cppprog/qt_asciiart/symbols.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

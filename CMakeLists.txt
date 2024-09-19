@@ -30,6 +30,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         AsciiArt.cpp Bitmap.cpp Bitmap.h BitmapFileHeader.cpp BitmapFileHeader.h BitmapInfoHeader.cpp BitmapInfoHeader.h Luminance.cpp Luminance.h MatrixIterator.cpp MatrixIterator.h Pallette.cpp Pallette.h PixArray.cpp PixArray.h RGBtriple.cpp RGBtriple.h
         AsciiArt.h
 
+        mystack.h
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET qt_asciiart APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

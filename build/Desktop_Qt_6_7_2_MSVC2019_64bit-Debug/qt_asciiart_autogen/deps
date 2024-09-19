@@ -372,6 +372,7 @@ qt_asciiart_autogen/timestamp: \
 	D:/cppprog/qt_asciiart/main.cpp \
 	D:/cppprog/qt_asciiart/mainwindow.cpp \
 	D:/cppprog/qt_asciiart/mainwindow.h \
+	D:/cppprog/qt_asciiart/mystack.h \
 	D:/cppprog/qt_asciiart/symbols.cpp \
 	D:/cppprog/qt_asciiart/symbols.h \
 	D:/cppprog/qt_asciiart/mainwindow.ui \

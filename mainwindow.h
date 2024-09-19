@@ -40,6 +40,14 @@ private slots:
 
     void on_plainTextEdit_textChanged();
 
+    void on_ButtonClearSymbols_clicked();
+
+    void on_ButtonResetSymbols_clicked();
+
+    void on_ButtonUndo_clicked();
+
+    void on_ButtonRedo_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

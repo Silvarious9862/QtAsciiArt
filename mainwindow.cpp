@@ -8,6 +8,7 @@
 #include <QString>
 #include <QScrollBar>
 #include <QClipboard>
+#include <QSaveFile>
 #include "AsciiArt.h"
 #include "mystack.h"
 
@@ -194,6 +195,7 @@ void MainWindow::on_ButtonUndo_clicked()
 {
     StackRedo.push(StackUndo.top());
     StackUndo.pop();
+
     if(StackUndo.empty()) {
         ui->Path->setText("");
         ui->Quality->setValue(1);
@@ -204,6 +206,7 @@ void MainWindow::on_ButtonUndo_clicked()
         ui->Quality->setValue(StackUndo.top().quality);
         ui->SymbolsArray->setText(StackUndo.top().symbols);
     }
+
     if(StackUndo.empty()) ui->ButtonUndo->setEnabled(false);
     ui->ButtonRedo->setEnabled(true);
 }
@@ -227,5 +230,15 @@ void MainWindow::on_ButtonRedo_clicked()
     StackRedo.pop();
     if(StackRedo.empty()) ui->ButtonRedo->setEnabled(false);
     ui->ButtonUndo->setEnabled(true);
+}
+
+
+void MainWindow::on_ButtonSave_clicked()
+{
+    QSaveFile file(QFileDialog::getSaveFileName(this, tr("Save as .txt"), "/", tr("Text file (*.txt)")));
+    file.setTextModeEnabled(true);
+    file.open(QIODevice::WriteOnly | QIODevice::Text);
+    file.write(ui->plainTextEdit->toPlainText().toStdString().c_str());
+    file.commit();
 }
 

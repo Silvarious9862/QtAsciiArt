@@ -48,6 +48,8 @@ private slots:
 
     void on_ButtonRedo_clicked();
 
+    void on_ButtonSave_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -9,6 +9,7 @@
 #include <QScrollBar>
 #include <QClipboard>
 #include <QSaveFile>
+#include <QFileInfo>
 #include "AsciiArt.h"
 #include "mystack.h"
 
@@ -65,9 +66,20 @@ void MainWindow::on_Path_textChanged(const QString &arg1)
          ui->SymbolsArray->setEnabled(false);
          ui->Quality->setEnabled(false);
     }
+
     if( !ui->Path->text().isEmpty() && !ui->SymbolsArray->text().isEmpty())
         ui->ButtonGenerate->setEnabled(true);
     else ui->ButtonGenerate->setEnabled(false);
+
+    if(ui->Path->text().isEmpty()) {
+        ui->Path->setStyleSheet("border: 1px solid red; border-radius: 4px");
+        ui->Path->setToolTip("Выберите исходное изображение");
+        ui->ButtonExplore->setFocus();
+    }
+    else {
+        ui->Path->setStyleSheet("border: none");
+        ui->Path->setToolTip("");
+    }
 }
 
 
@@ -76,6 +88,21 @@ void MainWindow::on_SymbolsArray_textChanged(const QString &arg1)
     if( !ui->Path->text().isEmpty() && !ui->SymbolsArray->text().isEmpty())
         ui->ButtonGenerate->setEnabled(true);
     else ui->ButtonGenerate->setEnabled(false);
+
+    switch(ui->SymbolsArray->text().size()) {
+    case 0:
+        ui->SymbolsArray->setStyleSheet("border: 1px solid red; border-radius: 4px");
+        ui->SymbolsArray->setToolTip("Введите несколько символов");
+        break;
+    case 1:
+        ui->SymbolsArray->setStyleSheet("border: 1px solid yellow; border-radius: 4px");
+        ui->SymbolsArray->setToolTip("Изображение из одного символа не будет корректным");
+        break;
+    default:
+        ui->SymbolsArray->setStyleSheet("border: none");
+        ui->SymbolsArray->setToolTip("");
+        break;
+    }
 }
 
 
@@ -240,5 +267,11 @@ void MainWindow::on_ButtonSave_clicked()
     file.open(QIODevice::WriteOnly | QIODevice::Text);
     file.write(ui->plainTextEdit->toPlainText().toStdString().c_str());
     file.commit();
+}
+
+
+void MainWindow::on_SymbolsArray_editingFinished()
+{
+
 }
 

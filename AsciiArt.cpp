@@ -82,6 +82,8 @@ void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vecto
 {
     for (auto symbol : symbols)
     {
+        auto check = std::find(symbolArray.begin(), symbolArray.end(), symbol) ;
+        if (check != symbolArray.end()) continue;
         QChar qsymbol = symbol;
         QString character(qsymbol);
         drawSymbol(character);
@@ -215,7 +217,7 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
         matrix_avg = ChooseQuality(matrix, matrix_avg, quality);
 
         // ------------- character selection --------------
-        std::sort(symbols.begin(), symbols.end());
+       // std::sort(symbols.begin(), symbols.end());
 
         std::vector<char> symbolArray{};
         std::vector<double> symbolVolume{};

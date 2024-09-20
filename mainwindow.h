@@ -50,6 +50,8 @@ private slots:
 
     void on_ButtonSave_clicked();
 
+    void on_SymbolsArray_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 };

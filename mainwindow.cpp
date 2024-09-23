@@ -132,7 +132,9 @@ void MainWindow::on_ButtonGenerate_clicked()
 
     QString qstr = QString::fromStdString(result);
     QFont newfont("Consolas", 2);
+    newfont.setLetterSpacing(QFont::PercentageSpacing, 200);
     ui->plainTextEdit->setFont(newfont);
+
     ui->plainTextEdit->setPlainText(qstr);
     ui->plainTextEdit->setFocus();
 
@@ -160,8 +162,12 @@ void MainWindow::on_zoomOut_clicked()
         zoomValue-=10;
         zoomValueStr = zoomValueStr.fromStdString(std::to_string(zoomValue)+"%");
         ui->zoomValue->setText(zoomValueStr);
-        if(zoomValue == 0)
+        if(zoomValue == 0) {
             ui->zoomOut->setEnabled(false);
+            QFont newfont(ui->plainTextEdit->font());
+            newfont.setLetterSpacing(QFont::PercentageSpacing, 100);
+            ui->plainTextEdit->setFont(newfont);
+        }
         if(zoomValue < 200) ui->zoomIn->setEnabled(true);
     }
 
@@ -173,6 +179,11 @@ void MainWindow::on_zoomIn_clicked()
 
     QFontInfo fontinfo = ui->plainTextEdit->fontInfo();
     if(fontinfo.pointSize()<21){
+        if(fontinfo.pointSize()==1) {
+            QFont newfont(ui->plainTextEdit->font());
+            newfont.setLetterSpacing(QFont::PercentageSpacing, 200);
+            ui->plainTextEdit->setFont(newfont);
+        }
         ui->plainTextEdit->zoomIn();
         QString zoomValueStr = ui->zoomValue->text();
         zoomValueStr.resize(zoomValueStr.size()-1);
@@ -180,7 +191,9 @@ void MainWindow::on_zoomIn_clicked()
         zoomValue+=10;
         zoomValueStr = zoomValueStr.fromStdString(std::to_string(zoomValue)+"%");
         ui->zoomValue->setText(zoomValueStr);
-        if(zoomValue > 0 ) ui->zoomOut->setEnabled(true);
+        if(zoomValue > 0 ) {
+            ui->zoomOut->setEnabled(true);
+        }
         if(zoomValue == 200) ui->zoomIn->setEnabled(false);
     }
 }

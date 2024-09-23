@@ -172,7 +172,7 @@ std::string printResult(std::vector<std::vector<char>>& matrix_ascii, int qualit
     //if(quality < 6) {
         for(auto& i : matrix_ascii){
             for(auto& j : i) {
-                output_str += ' ';
+                //output_str += ' ';
                 output_str += j;
 
             }

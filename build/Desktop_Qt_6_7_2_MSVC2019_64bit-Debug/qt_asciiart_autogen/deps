@@ -357,8 +357,6 @@ qt_asciiart_autogen/timestamp: \
 	D:/cppprog/qt_asciiart/CMakeLists.txt \
 	D:/cppprog/qt_asciiart/Luminance.cpp \
 	D:/cppprog/qt_asciiart/Luminance.h \
-	D:/cppprog/qt_asciiart/MatrixIterator.cpp \
-	D:/cppprog/qt_asciiart/MatrixIterator.h \
 	D:/cppprog/qt_asciiart/Pallette.cpp \
 	D:/cppprog/qt_asciiart/Pallette.h \
 	D:/cppprog/qt_asciiart/PixArray.cpp \
@@ -372,6 +370,7 @@ qt_asciiart_autogen/timestamp: \
 	D:/cppprog/qt_asciiart/main.cpp \
 	D:/cppprog/qt_asciiart/mainwindow.cpp \
 	D:/cppprog/qt_asciiart/mainwindow.h \
+	D:/cppprog/qt_asciiart/mymatrix.h \
 	D:/cppprog/qt_asciiart/mystack.h \
 	D:/cppprog/qt_asciiart/symbols.cpp \
 	D:/cppprog/qt_asciiart/symbols.h \

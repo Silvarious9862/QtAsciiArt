@@ -130,15 +130,6 @@ build CMakeFiles\qt_asciiart.dir\Luminance.cpp.obj: CXX_COMPILER__qt_asciiart_un
   TARGET_COMPILE_PDB = CMakeFiles\qt_asciiart.dir\
   TARGET_PDB = qt_asciiart.pdb
 
-build CMakeFiles\qt_asciiart.dir\MatrixIterator.cpp.obj: CXX_COMPILER__qt_asciiart_unscanned_Debug D$:\cppprog\qt_asciiart\MatrixIterator.cpp || cmake_object_order_depends_target_qt_asciiart
-  DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
-  FLAGS = -DQT_QML_DEBUG /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd -Zc:__cplusplus -permissive- -utf-8
-  INCLUDES = -ID:\cppprog\qt_asciiart\build\Desktop_Qt_6_7_2_MSVC2019_64bit-Debug\qt_asciiart_autogen\include -external:IC:\Qt\6.7.2\msvc2019_64\include\QtCore -external:IC:\Qt\6.7.2\msvc2019_64\include -external:IC:\Qt\6.7.2\msvc2019_64\mkspecs\win32-msvc -external:IC:\Qt\6.7.2\msvc2019_64\include\QtWidgets -external:IC:\Qt\6.7.2\msvc2019_64\include\QtGui -external:W0
-  OBJECT_DIR = CMakeFiles\qt_asciiart.dir
-  OBJECT_FILE_DIR = CMakeFiles\qt_asciiart.dir
-  TARGET_COMPILE_PDB = CMakeFiles\qt_asciiart.dir\
-  TARGET_PDB = qt_asciiart.pdb
-
 build CMakeFiles\qt_asciiart.dir\Pallette.cpp.obj: CXX_COMPILER__qt_asciiart_unscanned_Debug D$:\cppprog\qt_asciiart\Pallette.cpp || cmake_object_order_depends_target_qt_asciiart
   DEFINES = -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   FLAGS = -DQT_QML_DEBUG /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -std:c++17 -MDd -Zc:__cplusplus -permissive- -utf-8
@@ -174,7 +165,7 @@ build CMakeFiles\qt_asciiart.dir\RGBtriple.cpp.obj: CXX_COMPILER__qt_asciiart_un
 #############################################
 # Link the executable qt_asciiart.exe
 
-build qt_asciiart.exe: CXX_EXECUTABLE_LINKER__qt_asciiart_Debug CMakeFiles\qt_asciiart.dir\qt_asciiart_autogen\mocs_compilation.cpp.obj CMakeFiles\qt_asciiart.dir\main.cpp.obj CMakeFiles\qt_asciiart.dir\mainwindow.cpp.obj CMakeFiles\qt_asciiart.dir\symbols.cpp.obj CMakeFiles\qt_asciiart.dir\AsciiArt.cpp.obj CMakeFiles\qt_asciiart.dir\Bitmap.cpp.obj CMakeFiles\qt_asciiart.dir\BitmapFileHeader.cpp.obj CMakeFiles\qt_asciiart.dir\BitmapInfoHeader.cpp.obj CMakeFiles\qt_asciiart.dir\Luminance.cpp.obj CMakeFiles\qt_asciiart.dir\MatrixIterator.cpp.obj CMakeFiles\qt_asciiart.dir\Pallette.cpp.obj CMakeFiles\qt_asciiart.dir\PixArray.cpp.obj CMakeFiles\qt_asciiart.dir\RGBtriple.cpp.obj | C$:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgetsd.lib C$:\Qt\6.7.2\msvc2019_64\lib\Qt6Guid.lib C$:\Qt\6.7.2\msvc2019_64\lib\Qt6Cored.lib C$:\Qt\6.7.2\msvc2019_64\lib\Qt6EntryPointd.lib || qt_asciiart_autogen qt_asciiart_autogen_timestamp_deps
+build qt_asciiart.exe: CXX_EXECUTABLE_LINKER__qt_asciiart_Debug CMakeFiles\qt_asciiart.dir\qt_asciiart_autogen\mocs_compilation.cpp.obj CMakeFiles\qt_asciiart.dir\main.cpp.obj CMakeFiles\qt_asciiart.dir\mainwindow.cpp.obj CMakeFiles\qt_asciiart.dir\symbols.cpp.obj CMakeFiles\qt_asciiart.dir\AsciiArt.cpp.obj CMakeFiles\qt_asciiart.dir\Bitmap.cpp.obj CMakeFiles\qt_asciiart.dir\BitmapFileHeader.cpp.obj CMakeFiles\qt_asciiart.dir\BitmapInfoHeader.cpp.obj CMakeFiles\qt_asciiart.dir\Luminance.cpp.obj CMakeFiles\qt_asciiart.dir\Pallette.cpp.obj CMakeFiles\qt_asciiart.dir\PixArray.cpp.obj CMakeFiles\qt_asciiart.dir\RGBtriple.cpp.obj | C$:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgetsd.lib C$:\Qt\6.7.2\msvc2019_64\lib\Qt6Guid.lib C$:\Qt\6.7.2\msvc2019_64\lib\Qt6Cored.lib C$:\Qt\6.7.2\msvc2019_64\lib\Qt6EntryPointd.lib || qt_asciiart_autogen qt_asciiart_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG /DWIN32 /D_WINDOWS /GR /EHsc /Zi /Ob0 /Od /RTC1 -MDd
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:windows
   LINK_LIBRARIES = C:\Qt\6.7.2\msvc2019_64\lib\Qt6Widgetsd.lib  C:\Qt\6.7.2\msvc2019_64\lib\Qt6Guid.lib  C:\Qt\6.7.2\msvc2019_64\lib\Qt6Cored.lib  mpr.lib  userenv.lib  C:\Qt\6.7.2\msvc2019_64\lib\Qt6EntryPointd.lib  shell32.lib  d3d11.lib  dxgi.lib  dxguid.lib  d3d12.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

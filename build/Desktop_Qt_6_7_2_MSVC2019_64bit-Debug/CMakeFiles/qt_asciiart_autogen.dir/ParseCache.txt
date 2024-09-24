@@ -4,12 +4,11 @@ D:/cppprog/qt_asciiart/Pallette.cpp
 D:/cppprog/qt_asciiart/BitmapFileHeader.h
 D:/cppprog/qt_asciiart/Bitmap.h
 D:/cppprog/qt_asciiart/MatrixIterator.h
-D:/cppprog/qt_asciiart/BitmapInfoHeader.h
 D:/cppprog/qt_asciiart/symbols.cpp
-D:/cppprog/qt_asciiart/MatrixIterator.cpp
+D:/cppprog/qt_asciiart/BitmapInfoHeader.h
 D:/cppprog/qt_asciiart/PixArray.h
+D:/cppprog/qt_asciiart/MatrixIterator.cpp
 D:/cppprog/qt_asciiart/Luminance.h
-D:/cppprog/qt_asciiart/mystack.cpp
 D:/cppprog/qt_asciiart/Pallette.h
 D:/cppprog/qt_asciiart/RGBtriple.h
 D:/cppprog/qt_asciiart/mainwindow.h
@@ -169,6 +168,8 @@ D:/cppprog/qt_asciiart/mainwindow.h
  mdp:C:/Qt/6.7.2/msvc2019_64/include/QtWidgets/qtwidgetsglobal.h
  mdp:C:/Qt/6.7.2/msvc2019_64/include/QtWidgets/qwidget.h
  mdp:D:/cppprog/qt_asciiart/mainwindow.h
+D:/cppprog/qt_asciiart/mymatrix.h
+D:/cppprog/qt_asciiart/mystack.h
 D:/cppprog/qt_asciiart/symbols.h
 D:/cppprog/qt_asciiart/AsciiArt.cpp
 D:/cppprog/qt_asciiart/Bitmap.cpp
@@ -180,5 +181,3 @@ D:/cppprog/qt_asciiart/RGBtriple.cpp
 D:/cppprog/qt_asciiart/main.cpp
 D:/cppprog/qt_asciiart/mainwindow.cpp
  uic:./ui_mainwindow.h
-D:/cppprog/qt_asciiart/mystack.h
-D:/cppprog/qt_asciiart/Params.h

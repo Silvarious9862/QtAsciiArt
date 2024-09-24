@@ -48,7 +48,6 @@ set(OLD_GLOB
   "D:/cppprog/qt_asciiart/BitmapFileHeader.cpp"
   "D:/cppprog/qt_asciiart/BitmapInfoHeader.cpp"
   "D:/cppprog/qt_asciiart/Luminance.cpp"
-  "D:/cppprog/qt_asciiart/MatrixIterator.cpp"
   "D:/cppprog/qt_asciiart/Pallette.cpp"
   "D:/cppprog/qt_asciiart/PixArray.cpp"
   "D:/cppprog/qt_asciiart/RGBtriple.cpp"
@@ -87,7 +86,6 @@ set(OLD_GLOB
   "D:/cppprog/qt_asciiart/BitmapFileHeader.h"
   "D:/cppprog/qt_asciiart/BitmapInfoHeader.h"
   "D:/cppprog/qt_asciiart/Luminance.h"
-  "D:/cppprog/qt_asciiart/MatrixIterator.h"
   "D:/cppprog/qt_asciiart/Pallette.h"
   "D:/cppprog/qt_asciiart/PixArray.h"
   "D:/cppprog/qt_asciiart/RGBtriple.h"
@@ -98,6 +96,7 @@ set(OLD_GLOB
   "D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/qt_asciiart_autogen/include/ui_mainwindow.h"
   "D:/cppprog/qt_asciiart/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/qt_asciiart_autogen/moc_predefs.h"
   "D:/cppprog/qt_asciiart/mainwindow.h"
+  "D:/cppprog/qt_asciiart/mymatrix.h"
   "D:/cppprog/qt_asciiart/mystack.h"
   "D:/cppprog/qt_asciiart/symbols.h"
   )

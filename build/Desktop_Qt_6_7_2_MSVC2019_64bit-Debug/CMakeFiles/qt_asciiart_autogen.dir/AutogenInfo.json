@@ -314,12 +314,6 @@
 			null
 		],
 		[
-			"D:/cppprog/qt_asciiart/MatrixIterator.h",
-			"MU",
-			"EWIEGA46WW/moc_MatrixIterator.cpp",
-			null
-		],
-		[
 			"D:/cppprog/qt_asciiart/Pallette.h",
 			"MU",
 			"EWIEGA46WW/moc_Pallette.cpp",
@@ -341,6 +335,12 @@
 			"D:/cppprog/qt_asciiart/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
+			null
+		],
+		[
+			"D:/cppprog/qt_asciiart/mymatrix.h",
+			"MU",
+			"EWIEGA46WW/moc_mymatrix.cpp",
 			null
 		],
 		[
@@ -416,7 +416,6 @@
 		[ "D:/cppprog/qt_asciiart/BitmapFileHeader.cpp", "MU", null ],
 		[ "D:/cppprog/qt_asciiart/BitmapInfoHeader.cpp", "MU", null ],
 		[ "D:/cppprog/qt_asciiart/Luminance.cpp", "MU", null ],
-		[ "D:/cppprog/qt_asciiart/MatrixIterator.cpp", "MU", null ],
 		[ "D:/cppprog/qt_asciiart/Pallette.cpp", "MU", null ],
 		[ "D:/cppprog/qt_asciiart/PixArray.cpp", "MU", null ],
 		[ "D:/cppprog/qt_asciiart/RGBtriple.cpp", "MU", null ],

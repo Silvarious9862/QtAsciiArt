@@ -1,6 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "mainwindow.h"
-
 #include "./ui_mainwindow.h"
 #include <QFileDialog>
 #include <QDebug>
@@ -146,8 +145,9 @@ void MainWindow::on_ButtonCopy_clicked()
 {
     ui->plainTextEdit->selectAll();
     ui->plainTextEdit->copy();
-    ui->plainTextEdit->textCursor().clearSelection();
-
+    QTextCursor tmp = ui->plainTextEdit->textCursor();
+    tmp.clearSelection();
+    ui->plainTextEdit->setTextCursor(tmp);
 }
 
 

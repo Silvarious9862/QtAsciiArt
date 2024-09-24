@@ -27,10 +27,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         symbols.cpp symbols.h
-        AsciiArt.cpp Bitmap.cpp Bitmap.h BitmapFileHeader.cpp BitmapFileHeader.h BitmapInfoHeader.cpp BitmapInfoHeader.h Luminance.cpp Luminance.h MatrixIterator.cpp MatrixIterator.h Pallette.cpp Pallette.h PixArray.cpp PixArray.h RGBtriple.cpp RGBtriple.h
+        AsciiArt.cpp Bitmap.cpp Bitmap.h BitmapFileHeader.cpp BitmapFileHeader.h BitmapInfoHeader.cpp BitmapInfoHeader.h Luminance.cpp Luminance.h   Pallette.cpp Pallette.h PixArray.cpp PixArray.h RGBtriple.cpp RGBtriple.h
         AsciiArt.h
 
         mystack.h
+        mymatrix.h
 
 
 

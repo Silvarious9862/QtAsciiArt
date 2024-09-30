@@ -8,7 +8,7 @@
 
 void PrintMatrixAscii(std::vector<std::vector <char>> const& matrix);
 Matrix<double> CreateLightnessMatrix(Bitmap& image, Matrix<double>& matrix);
-Matrix<double> ChooseQuality(Matrix<double>& matrix_in, Matrix<double>& matrix_out, int quality = 5);
+Matrix<double> ChooseQuality(Matrix<double>& matrix_in, int quality = 5);
 void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume);
 void sortSymbols(std::vector<char>& symbolArray, std::vector<double>& symbolVolume);
 void setLightnessSymbols(std::vector<char>& symbolArray, std::vector<double>& symbolVolume);

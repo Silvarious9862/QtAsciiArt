@@ -51,15 +51,14 @@ Matrix<double> CreateLightnessMatrix(Bitmap& image, Matrix<double>& matrix)
     return matrix;
 }
 
-Matrix<double> ChooseQuality(Matrix<double>& matrix_in, Matrix<double>& matrix_out, int quality)
+Matrix<double> ChooseQuality(Matrix<double>& matrix_in, int quality)
 {
-    if (quality == SYMBOL_QUALITY) {
-
-    }
+    if (quality == SYMBOL_QUALITY) {}
     else if (quality < 1 || quality > 10) {
         throw std::exception("\x1B[36mQuality must be from 1 to 10\033[0m\t\t\n\x1B[33mCritical error\033[0m\t\t");
     }
 
+    Matrix<double> matrix_out;
     unsigned row = 0, col = 0;
     double avg_lightness = 0;
 
@@ -98,8 +97,7 @@ void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vecto
         Matrix<double> symbolLightnessMatrix(symbolBi.GetHeight(), symbolBi.GetWidth());
         symbolLightnessMatrix = CreateLightnessMatrix(symbolImage, symbolLightnessMatrix);
 
-        Matrix<double> symbolAvgLM;
-        symbolAvgLM = ChooseQuality(symbolLightnessMatrix, symbolAvgLM, SYMBOL_QUALITY);
+        Matrix<double> symbolAvgLM = ChooseQuality(symbolLightnessMatrix, SYMBOL_QUALITY);
 
         symbolArray.push_back(symbol);
         symbolVolume.push_back(symbolAvgLM(0,0));
@@ -190,8 +188,7 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
 
 
         // ------------- average lightness by squares -------------
-        Matrix<double> matrix_avg;
-        matrix_avg = ChooseQuality(matrix, matrix_avg, quality);
+        Matrix<double> matrix_avg = ChooseQuality(matrix, quality);
 
         // ------------- character selection --------------
        // std::sort(symbols.begin(), symbols.end());
@@ -205,7 +202,7 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
         matrix_ascii = LightnessToAscii(matrix_avg, symbolArray, symbolVolume);
         
         result = matrix_ascii.toString();
-       // matrix_ascii.print();
+        //matrix_ascii.print();
 
     }
     catch (std::out_of_range& e) 

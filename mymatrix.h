@@ -72,15 +72,9 @@ public:
         return this->m_matrix[row][col];
     }
 
-    void print() const
+    void print()
     {
-        std::cout << "Matrix:\n";
-        for (unsigned i = 0; i < m_rowSize; i++) {
-            for (unsigned j = 0; j < m_colSize; j++) {
-                std::cout << m_matrix[i][j];
-            }
-            std::cout << '\n';
-        }
+        std::cout << "Matrix:\n" << this->toString();
     }
 
     std::string toString()

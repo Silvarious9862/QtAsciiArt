@@ -6,7 +6,7 @@ bool drawSymbol(QString symbol)
     try {
         QImage img(15, 15, QImage::Format_RGB666);  // create an image
         img.setColorCount(24);  // set bitcount
-        img.fill(Qt::black);    // fill white
+        img.fill(Qt::black);    // fill black
         QPainter painter(&img);       // painter obj
 
         QFont font("Consolas", 25);
@@ -15,7 +15,7 @@ bool drawSymbol(QString symbol)
         QRectF rectangle;
         rectangle.setCoords(0,0,15,15);
 
-        painter.setPen(Qt::white);
+        painter.setPen(Qt::white);  // color of symbol - white on black background
         painter.drawText(rectangle, Qt::AlignCenter, symbol);
 
         QString filename = "symbol.bmp";

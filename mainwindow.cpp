@@ -165,7 +165,7 @@ void MainWindow::on_zoomOut_clicked()
         if(zoomValue == 0) {
             ui->zoomOut->setEnabled(false);
             QFont newfont(ui->plainTextEdit->font());
-            newfont.setLetterSpacing(QFont::PercentageSpacing, 100);
+            newfont.setLetterSpacing(QFont::PercentageSpacing, 250);
             ui->plainTextEdit->setFont(newfont);
         }
         if(zoomValue < 200) ui->zoomIn->setEnabled(true);

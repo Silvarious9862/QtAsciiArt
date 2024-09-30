@@ -90,13 +90,12 @@ namespace my
         try
         {
             if (size == 0) throw EMPTY;
-
+            return head->data;
         }
         catch(int a)
         {
             std::cout << "Stack is empty!" << std::endl;
         }
-        return head->data;
     }
 
     template <typename T>
@@ -108,8 +107,7 @@ namespace my
     template<typename T>
     bool my::Stack<T>::empty()
     {
-        if(getsize() == 0) return true;
-        else return false;
+        return getsize() == 0;
     }
 
 

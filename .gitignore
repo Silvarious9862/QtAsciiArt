@@ -56,5 +56,6 @@ compile_commands.json
 build/*MinGW*/
 build/*MinSi*/
 build/*Profi*/
+build/*
 
 

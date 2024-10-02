@@ -116,11 +116,11 @@ public:
 
     void push(unsigned row, unsigned col, T value)
     {
-        if(this->m_matrix.size() <= row) {
+        while(this->m_matrix.size() <= row) {
             this->m_matrix.emplace_back(1);
             this->m_rowSize++;
         }
-        if(this->m_matrix.at(row).size() <= col) {
+        while(this->m_matrix.at(row).size() <= col) {
             this->m_matrix.at(row).emplace_back(1);
             if(this->m_matrix.size() == 1) this->m_colSize++; }
         m_matrix.at(row).at(col) = value;

@@ -1,4 +1,4 @@
-#include "PixArray.h"
+#include "PixMap.h"
 
 
 void PixMap::SetSize(int width, int height)

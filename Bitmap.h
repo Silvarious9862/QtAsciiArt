@@ -2,7 +2,7 @@
 #include "BitmapFileHeader.h"
 #include "BitmapInfoHeader.h"
 #include "Pallette.h"
-#include "PixArray.h"
+#include "PixMap.h"
 #include <fstream>
 #include <string>
 #include <iostream>

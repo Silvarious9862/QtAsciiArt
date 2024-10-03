@@ -152,7 +152,7 @@ Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolA
         double current_pixel;
         for (int col = 0, pos = 0; col < matrix.getCols(); col++, pos = 0)    // for elems
         {
-            current_pixel = matrix(row, col);       // normalization from 0..100 to 0..1
+            current_pixel = matrix(row, col);       
             while(current_pixel>symbolVolume[pos])
                 pos++;
             matrix_ascii.push(row, col, symbolArray[pos]);      // add character to row

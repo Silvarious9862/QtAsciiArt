@@ -92,14 +92,17 @@ void MainWindow::on_SymbolsArray_textChanged(const QString &arg1)
     case 0:
         ui->SymbolsArray->setStyleSheet("border: 1px solid red; border-radius: 4px");
         ui->SymbolsArray->setToolTip("Введите несколько символов");
+        ui->ButtonGenerate->setEnabled(false);
         break;
     case 1:
         ui->SymbolsArray->setStyleSheet("border: 1px solid yellow; border-radius: 4px");
         ui->SymbolsArray->setToolTip("Изображение из одного символа не будет корректным");
+        ui->ButtonGenerate->setEnabled(true);
         break;
     default:
         ui->SymbolsArray->setStyleSheet("border: none");
         ui->SymbolsArray->setToolTip("");
+        ui->ButtonGenerate->setEnabled(true);
         break;
     }
 }

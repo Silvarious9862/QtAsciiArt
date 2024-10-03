@@ -159,7 +159,7 @@
           <bool>false</bool>
          </property>
          <property name="text">
-          <string>Generate art</string>
+          <string>Генерировать</string>
          </property>
         </widget>
        </item>

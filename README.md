@@ -28,7 +28,7 @@ make
 
 1. Run the program:
 ```bash
-\./QtAsciiArt
+./QtAsciiArt
 ```
 
 2. Load a BMP format image using the program's interface. You can use stock images from ./samples/

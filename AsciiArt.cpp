@@ -125,14 +125,14 @@ void setLightnessSymbols(std::vector<char>& symbolArray, std::vector<double>& sy
 {
     // distribute brightness evenly
     double volumeStep = 100.0/symbolVolume.size();
-    double volumeCurrent = volumeStep;
+    double volumeCurrent = 100;
     for (auto& i : symbolVolume) {
         i = volumeCurrent;
-        volumeCurrent += volumeStep;
+        volumeCurrent -= volumeStep;
     }
-    symbolVolume.at(0) = 0;
+    symbolVolume.at(0) = 100;
     auto& endpoint = symbolVolume.back();
-    endpoint = 100;
+    endpoint = 0;
 }
 
 void configureSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
@@ -150,11 +150,11 @@ Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolA
     for (int row = 0; row < matrix.getRows(); row++)   // for rows
     {
         double current_pixel;
-        for (int col = 0, pos = 0; col < matrix.getCols(); col++, pos = 0)    // for elems
+        for (int col = 0, pos = symbolVolume.size() - 1; col < matrix.getCols(); col++, pos = symbolVolume.size() - 1)    // for elems
         {
             current_pixel = matrix(row, col);       
             while(current_pixel>symbolVolume[pos])
-                pos++;
+                pos--;
             matrix_ascii.push(row, col, symbolArray[pos]);      // add character to row
         }
     }

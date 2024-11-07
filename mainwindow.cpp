@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->ButtonExplore->setFocus();
     ui->plainTextEdit->setPlaceholderText("Здесь будет ваш ASCII-Art");
     ui->plainTextEdit->setReadOnly(true);
+    ui->plainTextEdit->setWordWrapMode(QTextOption::NoWrap);
 
 }
 
@@ -133,8 +134,12 @@ void MainWindow::on_ButtonGenerate_clicked()
     qDebug() << "Art Done! " << std::asctime(std::localtime(&sec));
 
     QString qstr = QString::fromStdString(result);
-    QFont newfont("Consolas", 2);
-    newfont.setLetterSpacing(QFont::PercentageSpacing, 200);
+    QFont newfont("Consolas");
+    newfont.setPointSize(1);
+    newfont.setStretch(1);
+    newfont.setStyleHint(QFont::Monospace, QFont::PreferBitmap);
+    newfont.setFixedPitch(true);
+    newfont.setLetterSpacing(QFont::PercentageSpacing, 100);
     ui->plainTextEdit->setFont(newfont);
 
     ui->plainTextEdit->setPlainText(qstr);
@@ -157,48 +162,24 @@ void MainWindow::on_ButtonCopy_clicked()
 void MainWindow::on_zoomOut_clicked()
 {
     QFontInfo fontinfo = ui->plainTextEdit->fontInfo();
-    if(fontinfo.pointSize()>1){
-        ui->plainTextEdit->zoomOut();
-        QString zoomValueStr = ui->zoomValue->text();
-        zoomValueStr.resize(zoomValueStr.size()-1);
-        int zoomValue = zoomValueStr.toInt();
-        zoomValue-=10;
-        zoomValueStr = zoomValueStr.fromStdString(std::to_string(zoomValue)+"%");
-        ui->zoomValue->setText(zoomValueStr);
-        if(zoomValue == 0) {
-            ui->zoomOut->setEnabled(false);
-            QFont newfont(ui->plainTextEdit->font());
-            newfont.setLetterSpacing(QFont::PercentageSpacing, 250);
-            ui->plainTextEdit->setFont(newfont);
-        }
-        if(zoomValue < 200) ui->zoomIn->setEnabled(true);
+    if(fontinfo.pointSize() > 1) {
+        const auto font = ui->plainTextEdit->font();
+        QFont newfont(font);
+        newfont.setPointSize(fontinfo.pointSize() - 1);
+        newfont.setLetterSpacing(QFont::PercentageSpacing, font.letterSpacing() - font.letterSpacing() * 0.2);
+        ui->plainTextEdit->setFont(newfont);
     }
-
 }
 
 
 void MainWindow::on_zoomIn_clicked()
 {
-
     QFontInfo fontinfo = ui->plainTextEdit->fontInfo();
-    if(fontinfo.pointSize()<21){
-        if(fontinfo.pointSize()==1) {
-            QFont newfont(ui->plainTextEdit->font());
-            newfont.setLetterSpacing(QFont::PercentageSpacing, 200);
-            ui->plainTextEdit->setFont(newfont);
-        }
-        ui->plainTextEdit->zoomIn();
-        QString zoomValueStr = ui->zoomValue->text();
-        zoomValueStr.resize(zoomValueStr.size()-1);
-        int zoomValue = zoomValueStr.toInt();
-        zoomValue+=10;
-        zoomValueStr = zoomValueStr.fromStdString(std::to_string(zoomValue)+"%");
-        ui->zoomValue->setText(zoomValueStr);
-        if(zoomValue > 0 ) {
-            ui->zoomOut->setEnabled(true);
-        }
-        if(zoomValue == 200) ui->zoomIn->setEnabled(false);
-    }
+    const auto font = ui->plainTextEdit->font();
+    QFont newfont(font);
+    newfont.setPointSize(fontinfo.pointSize() + 1);
+    newfont.setLetterSpacing(QFont::PercentageSpacing, font.letterSpacing() + font.letterSpacing() * 0.2);
+    ui->plainTextEdit->setFont(newfont);
 }
 
 
@@ -215,9 +196,7 @@ void MainWindow::on_plainTextEdit_textChanged()
     else {
         ui->ButtonCopy->setEnabled(false);
         ui->ButtonSave->setEnabled(false);
-        ui->zoomIn->setEnabled(false);
-        ui->zoomOut->setEnabled(false);
-        ui->zoomValue->setEnabled(false);
+
     }
 }
 

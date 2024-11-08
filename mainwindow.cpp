@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->plainTextEdit->setPlaceholderText("Здесь будет ваш ASCII-Art");
     ui->plainTextEdit->setReadOnly(true);
     ui->plainTextEdit->setWordWrapMode(QTextOption::NoWrap);
-
+    on_ButtonResetSymbols_clicked();
 }
 
 MainWindow::~MainWindow()
@@ -209,7 +209,7 @@ void MainWindow::on_ButtonClearSymbols_clicked()
 
 void MainWindow::on_ButtonResetSymbols_clicked()
 {
-    ui->SymbolsArray->setText(" `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@");
+    ui->SymbolsArray->setText(" `.,:;!/\\%&*?@#=");
 }
 
 

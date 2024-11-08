@@ -45,7 +45,7 @@ Matrix<double> CreateLightnessMatrix(Bitmap& image, Matrix<double>& matrix)
             const auto lightness = FindPerceivedLightness(pixel.GetRed(),    // find lightness of pixel
                 pixel.GetGreen(),
                 pixel.GetBlue());
-            matrix(row, col) = lightness;             // set matrix of lightnesses
+            matrix(row, col) = std::max(lightness, 0.0);             // set matrix of lightnesses
         }
     }
     return matrix;
@@ -150,12 +150,14 @@ Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolA
     for (int row = 0; row < matrix.getRows(); row++)   // for rows
     {
         double current_pixel;
+        double correction = 0;
         for (int col = 0, pos = symbolVolume.size() - 1; col < matrix.getCols(); col++, pos = symbolVolume.size() - 1)    // for elems
         {
-            current_pixel = matrix(row, col);       
+            current_pixel = matrix(row, col) + correction;
             while(current_pixel>symbolVolume[pos])
                 pos--;
             matrix_ascii.push(row, col, symbolArray[pos]);      // add character to row
+            correction = current_pixel - symbolVolume[pos];
         }
     }
     return matrix_ascii;

@@ -1,22 +1,37 @@
 #include "symbols.h"
 #include <iostream>
 
-bool drawSymbol(QString symbol)
+bool drawSymbol(QString symbol, quint32 fontSize)
 {
     try {
-        QImage img(15, 15, QImage::Format_RGB666);  // create an image
-        img.setColorCount(24);  // set bitcount
-        img.fill(Qt::black);    // fill black
-        QPainter painter(&img);       // painter obj
+        QFont font("Consolas");
+        font.setPixelSize(fontSize);
+        font.setStyleHint(QFont::Monospace, QFont::PreferBitmap);
+        font.setFixedPitch(true);
 
-        QFont font("Consolas", 25);
-        painter.setFont(font);  // using font consolas 10
+        QTextOption option;
+        option.setAlignment(Qt::AlignLeft);
 
-        QRectF rectangle;
-        rectangle.setCoords(0,0,15,15);
+        // need only to obtain correct perfectRect
+        QImage dummyImg(200, 200, QImage::Format_RGB666);
+        QPainter painter;
 
+        painter.begin(&dummyImg);
+        painter.setFont(font);
         painter.setPen(Qt::white);  // color of symbol - white on black background
-        painter.drawText(rectangle, Qt::AlignCenter, symbol);
+        // rect size should be big enaught to fit symbol
+        const auto perfectRect = painter.boundingRect(QRectF(0, 0, 1000, 1000), symbol, option);
+        painter.end();
+
+        QImage img(perfectRect.size().toSize(), QImage::Format_RGB666);
+        img.setColorCount(24);
+        img.fill(Qt::black);
+
+        painter.begin(&img);
+        painter.setFont(font);
+        painter.setPen(Qt::white);  // color of symbol - white on black background
+        painter.drawText(perfectRect, Qt::AlignLeft, symbol);
+        painter.end();
 
         QString filename = "symbol.bmp";
         img.save(filename);

@@ -11,6 +11,7 @@
 #include <QFileInfo>
 #include "AsciiArt.h"
 #include "mystack.h"
+#include "symbols.h"
 
 struct Params{
     QString path;
@@ -123,7 +124,8 @@ void MainWindow::on_ButtonGenerate_clicked()
 
 
     // exec converter
-    std::string result (MakeAsciiArt((ui->Path->text()).toStdString(), ui->Quality->value(), (ui->SymbolsArray->text()).toStdString()));
+
+    std::string result (MakeAsciiArt((ui->Path->text()).toStdString(), ui->Quality->value(), (ui->SymbolsArray->text()).toStdString(), ui->SpinBoxFontSize->value()));
     if(result == "") {
         QMessageBox::critical(this, "Ошибка", "Преобразование данного изображения недоступно.\nВозможные причины:"
                                               "\n- Файл изображения поврежден или недоступен\n- Разрядность картинки не равна 24 бит");
@@ -210,6 +212,7 @@ void MainWindow::on_ButtonClearSymbols_clicked()
 void MainWindow::on_ButtonResetSymbols_clicked()
 {
     ui->SymbolsArray->setText(" `.,:;!/\\%&*?@#=");
+    // ui->SymbolsArray->setText(" `.-':_,^=;><+!rc*/z?sLTv)J7(|Fi{C}fI31tlu[neoZ5Yxjya]2ESwqkP6h9d4VpOGbUAKXHm8RD#$Bg0MNWQ%&@");
 }
 
 

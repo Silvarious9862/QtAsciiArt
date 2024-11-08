@@ -1,15 +1,14 @@
 #include "AsciiArt.h"
 #include "Bitmap.h"
 #include "Luminance.h"
-#include "symbols.h"
 #include "mymatrix.h"
+#include "symbols.h"
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
+#include <set>
 #include <string>
 #include <vector>
-#include <algorithm>
-
-#define SYMBOL_QUALITY 15
 
 class BitmapFileHeader;
 class BitmapInfoHeader;
@@ -19,7 +18,18 @@ class PixMap;
 class Bitmap;
 
 
+struct VolumedSymbol
+{
+    char symbol;
+    double volume;
 
+    bool operator<(const VolumedSymbol& other) const {
+        return volume < other.volume;
+    }
+};
+
+
+void configureSymbols(std::string& symbols, std::set<VolumedSymbol> &volumedSymbols);
 
 void PrintMatrixAscii(std::vector<std::vector <char>> const& matrix)
 {
@@ -53,11 +63,6 @@ Matrix<double> CreateLightnessMatrix(Bitmap& image, Matrix<double>& matrix)
 
 Matrix<double> ChooseQuality(Matrix<double>& matrix_in, int quality)
 {
-    if (quality == SYMBOL_QUALITY) {}
-    else if (quality < 1 || quality > 10) {
-        throw std::exception("\x1B[36mQuality must be from 1 to 10\033[0m\t\t\n\x1B[33mCritical error\033[0m\t\t");
-    }
-
     Matrix<double> matrix_out;
     unsigned row = 0, col = 0;
     double avg_lightness = 0;
@@ -77,7 +82,7 @@ Matrix<double> ChooseQuality(Matrix<double>& matrix_in, int quality)
     return matrix_out;
 }
 
-void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
+void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume, quint32 fontSize)
 {
     for (auto symbol : symbols)
     {
@@ -85,7 +90,7 @@ void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vecto
         if (check != symbolArray.end()) continue;
         QChar qsymbol = symbol;
         QString character(qsymbol);
-        drawSymbol(character);
+        drawSymbol(character, fontSize);
 
         Bitmap symbolImage;
 
@@ -97,10 +102,16 @@ void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vecto
         Matrix<double> symbolLightnessMatrix(symbolBi.GetHeight(), symbolBi.GetWidth());
         symbolLightnessMatrix = CreateLightnessMatrix(symbolImage, symbolLightnessMatrix);
 
-        Matrix<double> symbolAvgLM = ChooseQuality(symbolLightnessMatrix, SYMBOL_QUALITY);
+        double avg = 0;
+        for (auto row = 0; row < symbolLightnessMatrix.getRows(); ++row) {
+            for (auto col = 0; col < symbolLightnessMatrix.getCols(); ++col) {
+                avg += symbolLightnessMatrix(row, col);
+            }
+        }
+        avg /= symbolLightnessMatrix.getRows() * symbolLightnessMatrix.getCols();
 
         symbolArray.push_back(symbol);
-        symbolVolume.push_back(symbolAvgLM(0,0));
+        symbolVolume.push_back(avg);
         remove("symbol.bmp");
     }
     symbolArray.shrink_to_fit();
@@ -135,11 +146,16 @@ void setLightnessSymbols(std::vector<char>& symbolArray, std::vector<double>& sy
     endpoint = 0;
 }
 
-void configureSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
+void configureSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume, quint32 fontSize)
 {
-    setSymbols(symbols, symbolArray,symbolVolume);
+    setSymbols(symbols, symbolArray,symbolVolume, fontSize);
     sortSymbols(symbolArray, symbolVolume);
     setLightnessSymbols(symbolArray, symbolVolume);
+}
+
+void configureSymbols(std::string& symbols, std::set<VolumedSymbol>& volumedSymbols)
+{
+
 }
 
 Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
@@ -164,7 +180,7 @@ Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolA
 }
 
 
-std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
+std::string MakeAsciiArt(std::string path, int quality, std::string symbols, quint32 fontSize)
 {
 //    std::cout << "START" << quality << std::endl;
     Bitmap image;           // create object of image
@@ -182,9 +198,6 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
 
 
         // ------------- counting lightness -----------
-        //std::vector<std::vector<double>> matrix(bitmapInfo.GetHeight(), std::vector<double>(bitmapInfo.GetWidth(), 0));
-        //matrix = CreateLightnessMatrix(image, matrix);
-
         Matrix<double> matrix(bitmapInfo.GetHeight(), bitmapInfo.GetWidth());
         matrix = CreateLightnessMatrix(image, matrix);
 
@@ -197,7 +210,10 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
 
         std::vector<char> symbolArray{};
         std::vector<double> symbolVolume{};
-        configureSymbols(symbols, symbolArray, symbolVolume);
+
+        std::set<VolumedSymbol> volumedSymbols;
+        configureSymbols(symbols, symbolArray, symbolVolume, fontSize);
+        configureSymbols(symbols, volumedSymbols);
 
         // ---------------- Change lightness to ascii ----------
         Matrix<char> matrix_ascii;

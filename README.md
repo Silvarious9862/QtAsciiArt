@@ -10,7 +10,7 @@ QtAsciiArt allows users to load BMP format images and convert them into ASCII ar
 
 1. Clone the repository:
 ```bash
-git clone https://github\.com/Silvarious9862/QtAsciiArt\.git
+git clone https://github.com/Silvarious9862/QtAsciiArt.git
 ```
 
 2. Navigate to the project directory:
@@ -28,7 +28,7 @@ make
 
 1. Run the program:
 ```bash
-\./QtAsciiArt
+./QtAsciiArt
 ```
 
 2. Load a BMP format image using the program's interface. You can use stock images from ./samples/

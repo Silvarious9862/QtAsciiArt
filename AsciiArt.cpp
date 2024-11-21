@@ -37,70 +37,6 @@ void PrintMatrixAscii(std::vector<std::vector <char>> const& matrix)
     }
 }
 
-void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
-{
-    for (auto symbol : symbols)
-    {
-        auto check = std::find(symbolArray.begin(), symbolArray.end(), symbol) ;
-        if (check != symbolArray.end()) continue;
-        QChar qsymbol = symbol;
-        QString character(qsymbol);
-        drawSymbol(character);
-
-        Bitmap symbolImage;
-
-        if (!symbolImage.ReadBMP("symbol.bmp")) {    // read image from file.bmp
-            throw std::exception("\xB[32mCannot read symbol\033[0m\t\t\n\x1B[33mCritical error\033[0m\t\t");
-        }
-
-        LightnessMatrixCreator symbolDefaultCreator(symbolImage);
-        QualityDecorator symbolQualityDecorator(symbolDefaultCreator, 15);
-        ILightnessMatrixCreator* symbolCreator = &symbolQualityDecorator;
-
-
-        symbolArray.push_back(symbol);
-        symbolVolume.push_back(symbolCreator->create()(0,0));
-        remove("symbol.bmp");
-    }
-    symbolArray.shrink_to_fit();
-    symbolVolume.shrink_to_fit();
-}
-
-void sortSymbols(std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
-{
-    for(int startIndex = 0; startIndex < symbolVolume.size()-1 ; ++startIndex) {
-        int smallestIndex = startIndex;
-        for(int currentIndex = startIndex + 1; currentIndex < symbolVolume.size(); ++currentIndex ) {
-            if (symbolVolume[currentIndex] < symbolVolume[smallestIndex]) {
-                smallestIndex = currentIndex;
-            }
-        }
-        std::swap(symbolArray[startIndex], symbolArray[smallestIndex]);
-        std::swap(symbolVolume[startIndex], symbolVolume[smallestIndex]);
-    }
-}
-
-void setLightnessSymbols(std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
-{
-    // distribute brightness evenly
-    double volumeStep = 100.0/symbolVolume.size();
-    double volumeCurrent = volumeStep;
-    for (auto& i : symbolVolume) {
-        i = volumeCurrent;
-        volumeCurrent += volumeStep;
-    }
-    symbolVolume.at(0) = 0;
-    auto& endpoint = symbolVolume.back();
-    endpoint = 100;
-}
-
-void configureSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
-{
-    setSymbols(symbols, symbolArray,symbolVolume);
-    sortSymbols(symbolArray, symbolVolume);
-    setLightnessSymbols(symbolArray, symbolVolume);
-}
-
 Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
 {
     // output matrix
@@ -123,7 +59,7 @@ Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolA
 
 std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
 {
-//    std::cout << "START" << quality << std::endl;
+
     Bitmap image;           // create object of image
     std::string result = "";
 
@@ -139,34 +75,20 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
 
 
         // ------------- counting lightness -----------
-        //std::vector<std::vector<double>> matrix(bitmapInfo.GetHeight(), std::vector<double>(bitmapInfo.GetWidth(), 0));
-        //matrix = CreateLightnessMatrix(image, matrix);
-
-        //Matrix<double> matrix(bitmapInfo.GetHeight(), bitmapInfo.GetWidth());
-        //matrix = LightnessMatrixCreator(image, matrix);
         LightnessMatrixCreator defaultCreator(image);
-
-        // ------------- average lightness by squares -------------
-        //Matrix<double> matrix_avg = ChooseQuality(matrix, quality);
         QualityDecorator qualityDecorator(defaultCreator, quality);
         ILightnessMatrixCreator* creator = &qualityDecorator;
         Matrix<double> matrix_avg = creator->create();
 
         // ------------- character selection --------------
-        // std::sort(symbols.begin(), symbols.end());
-
         std::vector<char> symbolArray{};
         std::vector<double> symbolVolume{};
         configureSymbols(symbols, symbolArray, symbolVolume);
 
         // ---------------- Change lightness to ascii ----------
-
-        // matrix_ascii;
         Matrix<char> matrix_ascii = LightnessToAscii(matrix_avg, symbolArray, symbolVolume);
         
         result = matrix_ascii.toString();
-        //matrix_ascii.print();
-
     }
     catch (std::out_of_range& e) 
     {

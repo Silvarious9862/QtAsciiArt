@@ -1,5 +1,8 @@
 #include "symbols.h"
 #include <iostream>
+#include "Bitmap.h"
+#include "LightnessMatrixCreator.h"
+#include "QualityDecorator.h"
 
 bool drawSymbol(QString symbol)
 {
@@ -27,4 +30,68 @@ bool drawSymbol(QString symbol)
         return false;
     }
     return true;
+}
+
+void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
+{
+    for (auto symbol : symbols)
+    {
+        auto check = std::find(symbolArray.begin(), symbolArray.end(), symbol) ;
+        if (check != symbolArray.end()) continue;
+        QChar qsymbol = symbol;
+        QString character(qsymbol);
+        drawSymbol(character);
+
+        Bitmap symbolImage;
+
+        if (!symbolImage.ReadBMP("symbol.bmp")) {    // read image from file.bmp
+            throw std::exception("\xB[32mCannot read symbol\033[0m\t\t\n\x1B[33mCritical error\033[0m\t\t");
+        }
+
+        LightnessMatrixCreator symbolDefaultCreator(symbolImage);
+        QualityDecorator symbolQualityDecorator(symbolDefaultCreator, 15);
+        ILightnessMatrixCreator* symbolCreator = &symbolQualityDecorator;
+
+
+        symbolArray.push_back(symbol);
+        symbolVolume.push_back(symbolCreator->create()(0,0));
+        remove("symbol.bmp");
+    }
+    symbolArray.shrink_to_fit();
+    symbolVolume.shrink_to_fit();
+}
+
+void sortSymbols(std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
+{
+    for(int startIndex = 0; startIndex < symbolVolume.size()-1 ; ++startIndex) {
+        int smallestIndex = startIndex;
+        for(int currentIndex = startIndex + 1; currentIndex < symbolVolume.size(); ++currentIndex ) {
+            if (symbolVolume[currentIndex] < symbolVolume[smallestIndex]) {
+                smallestIndex = currentIndex;
+            }
+        }
+        std::swap(symbolArray[startIndex], symbolArray[smallestIndex]);
+        std::swap(symbolVolume[startIndex], symbolVolume[smallestIndex]);
+    }
+}
+
+void setLightnessSymbols(std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
+{
+    // distribute brightness evenly
+    double volumeStep = 100.0/symbolVolume.size();
+    double volumeCurrent = volumeStep;
+    for (auto& i : symbolVolume) {
+        i = volumeCurrent;
+        volumeCurrent += volumeStep;
+    }
+    symbolVolume.at(0) = 0;
+    auto& endpoint = symbolVolume.back();
+    endpoint = 100;
+}
+
+void configureSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
+{
+    setSymbols(symbols, symbolArray,symbolVolume);
+    sortSymbols(symbolArray, symbolVolume);
+    setLightnessSymbols(symbolArray, symbolVolume);
 }

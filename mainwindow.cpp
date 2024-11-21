@@ -31,6 +31,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->ButtonExplore->setFocus();
     ui->plainTextEdit->setPlaceholderText("Здесь будет ваш ASCII-Art");
     ui->plainTextEdit->setReadOnly(true);
+#ifdef QT_DEBUG
+    ui->Path->setText("D:/cppprog/qt_asciiart/samples/normal7_resize.bmp");
+    ui->Quality->setValue(5);
+    ui->ButtonGenerate->click();
+#endif
 
 }
 

@@ -1,8 +1,10 @@
 #include "AsciiArt.h"
 #include "Bitmap.h"
-#include "Luminance.h"
 #include "symbols.h"
 #include "mymatrix.h"
+#include "ILightnessMatrixCreator.h"
+#include "LightnessMatrixCreator.h"
+#include "QualityDecorator.h"
 #include <iomanip>
 #include <iostream>
 #include <string>
@@ -35,48 +37,6 @@ void PrintMatrixAscii(std::vector<std::vector <char>> const& matrix)
     }
 }
 
-Matrix<double> CreateLightnessMatrix(Bitmap& image, Matrix<double>& matrix)
-{
-    for (int row = 0; row < matrix.getRows(); ++row)           // for rows
-    {
-        for (int col = 0; col < matrix.getCols(); col++)  // for elements
-        {
-            const auto& pixel = image.GetPixel(row, col);    // get pixel
-            const auto lightness = FindPerceivedLightness(pixel.GetRed(),    // find lightness of pixel
-                pixel.GetGreen(),
-                pixel.GetBlue());
-            matrix(row, col) = lightness;             // set matrix of lightnesses
-        }
-    }
-    return matrix;
-}
-
-Matrix<double> ChooseQuality(Matrix<double>& matrix_in, int quality)
-{
-    if (quality == SYMBOL_QUALITY) {}
-    else if (quality < 1 || quality > 10) {
-        throw std::exception("\x1B[36mQuality must be from 1 to 10\033[0m\t\t\n\x1B[33mCritical error\033[0m\t\t");
-    }
-
-    Matrix<double> matrix_out;
-    unsigned row = 0, col = 0;
-    double avg_lightness = 0;
-
-    for (Matrix<double>::iterator mi(matrix_in, quality); !mi.checkFullDone(); ) {
-
-        avg_lightness = matrix_in.countAvg(mi);
-        matrix_out.push(row, col, avg_lightness);
-        mi++;
-        col++;
-        if (mi.checkRowDone()) {
-            col = 0;
-            row++;
-            mi.unsetRowDone();
-        }
-    }
-    return matrix_out;
-}
-
 void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vector<double>& symbolVolume)
 {
     for (auto symbol : symbols)
@@ -92,15 +52,14 @@ void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vecto
         if (!symbolImage.ReadBMP("symbol.bmp")) {    // read image from file.bmp
             throw std::exception("\xB[32mCannot read symbol\033[0m\t\t\n\x1B[33mCritical error\033[0m\t\t");
         }
-        const auto& symbolBi = symbolImage.GetBitmapInfo();
 
-        Matrix<double> symbolLightnessMatrix(symbolBi.GetHeight(), symbolBi.GetWidth());
-        symbolLightnessMatrix = CreateLightnessMatrix(symbolImage, symbolLightnessMatrix);
+        LightnessMatrixCreator symbolDefaultCreator(symbolImage);
+        QualityDecorator symbolQualityDecorator(symbolDefaultCreator, 15);
+        ILightnessMatrixCreator* symbolCreator = &symbolQualityDecorator;
 
-        Matrix<double> symbolAvgLM = ChooseQuality(symbolLightnessMatrix, SYMBOL_QUALITY);
 
         symbolArray.push_back(symbol);
-        symbolVolume.push_back(symbolAvgLM(0,0));
+        symbolVolume.push_back(symbolCreator->create()(0,0));
         remove("symbol.bmp");
     }
     symbolArray.shrink_to_fit();
@@ -183,23 +142,27 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
         //std::vector<std::vector<double>> matrix(bitmapInfo.GetHeight(), std::vector<double>(bitmapInfo.GetWidth(), 0));
         //matrix = CreateLightnessMatrix(image, matrix);
 
-        Matrix<double> matrix(bitmapInfo.GetHeight(), bitmapInfo.GetWidth());
-        matrix = CreateLightnessMatrix(image, matrix);
-
+        //Matrix<double> matrix(bitmapInfo.GetHeight(), bitmapInfo.GetWidth());
+        //matrix = LightnessMatrixCreator(image, matrix);
+        LightnessMatrixCreator defaultCreator(image);
 
         // ------------- average lightness by squares -------------
-        Matrix<double> matrix_avg = ChooseQuality(matrix, quality);
+        //Matrix<double> matrix_avg = ChooseQuality(matrix, quality);
+        QualityDecorator qualityDecorator(defaultCreator, quality);
+        ILightnessMatrixCreator* creator = &qualityDecorator;
+        Matrix<double> matrix_avg = creator->create();
 
         // ------------- character selection --------------
-       // std::sort(symbols.begin(), symbols.end());
+        // std::sort(symbols.begin(), symbols.end());
 
         std::vector<char> symbolArray{};
         std::vector<double> symbolVolume{};
         configureSymbols(symbols, symbolArray, symbolVolume);
 
         // ---------------- Change lightness to ascii ----------
-        Matrix<char> matrix_ascii;
-        matrix_ascii = LightnessToAscii(matrix_avg, symbolArray, symbolVolume);
+
+        // matrix_ascii;
+        Matrix<char> matrix_ascii = LightnessToAscii(matrix_avg, symbolArray, symbolVolume);
         
         result = matrix_ascii.toString();
         //matrix_ascii.print();

@@ -11,7 +11,8 @@ class Bitmap
 {
 public:
 
-    Bitmap(const char*path = "tmp.bmp");           
+    Bitmap(const char*path = "tmp.bmp");
+    Bitmap(const Bitmap &image);
     void SetMonoBitmap(char red, char green, char blue);    // create a bitmap with one color fill
     void SaveAsBMP();       // save bitmap locally
     const BitmapInfoHeader& GetBitmapInfo() const { return bi; }

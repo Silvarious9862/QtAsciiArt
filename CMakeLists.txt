@@ -26,14 +26,21 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(qt_asciiart
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        .gitignore
         symbols.cpp symbols.h
-        AsciiArt.cpp Bitmap.cpp Bitmap.h BitmapFileHeader.cpp BitmapFileHeader.h BitmapInfoHeader.cpp BitmapInfoHeader.h Luminance.cpp Luminance.h   Pallette.cpp Pallette.h RGBtriple.cpp RGBtriple.h
-        AsciiArt.h
-
+        AsciiArt.cpp AsciiArt.h
+        Bitmap.cpp Bitmap.h
+        BitmapFileHeader.cpp BitmapFileHeader.h
+        BitmapInfoHeader.cpp BitmapInfoHeader.h
+        Luminance.cpp Luminance.h
+        Pallette.cpp Pallette.h
+        RGBtriple.cpp RGBtriple.h
         mystack.h
         mymatrix.h
-        .gitignore
         PixMap.cpp PixMap.h
+        ILightnessMatrixCreator.h
+        LightnessMatrixCreator.h LightnessMatrixCreator.cpp
+        QualityDecorator.h QualityDecorator.cpp
 
 
 

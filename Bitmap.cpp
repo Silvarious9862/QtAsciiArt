@@ -7,6 +7,17 @@ Bitmap::Bitmap(const char*path)
     this->path = path;
 }
 
+Bitmap::Bitmap(const Bitmap &image)
+{
+    bi = image.bi;
+    bf = image.bf;
+    pal = image.pal;
+    rgb = image.rgb;
+    pixels = image.pixels;
+    path = image.path;
+
+}
+
 void Bitmap::SetMonoBitmap(char red, char green, char blue)
 {
     bi.SetBitCount(24);

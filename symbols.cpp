@@ -49,7 +49,7 @@ void setSymbols(std::string& symbols, std::vector<char>& symbolArray, std::vecto
         }
 
         LightnessMatrixCreator symbolDefaultCreator(symbolImage);
-        QualityDecorator symbolQualityDecorator(symbolDefaultCreator, 15);
+        QualityDecorator symbolQualityDecorator(symbolDefaultCreator, symbolImage.GetBitmapInfo().GetHeight());
         ILightnessMatrixCreator* symbolCreator = &symbolQualityDecorator;
 
 

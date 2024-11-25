@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->plainTextEdit->setPlaceholderText("Здесь будет ваш ASCII-Art");
     ui->plainTextEdit->setReadOnly(true);
 #ifdef QT_DEBUG
-    ui->Path->setText("D:/cppprog/qt_asciiart/samples/normal7_resize.bmp");
+    ui->Path->setText("D:/cppprog/qt_asciiart/samples/normal7.bmp");
     ui->Quality->setValue(5);
     ui->ButtonGenerate->click();
 #endif
@@ -139,7 +139,7 @@ void MainWindow::on_ButtonGenerate_clicked()
 
     QString qstr = QString::fromStdString(result);
     QFont newfont("Consolas", 2);
-    newfont.setLetterSpacing(QFont::PercentageSpacing, 200);
+    newfont.setLetterSpacing(QFont::PercentageSpacing, 250);
     ui->plainTextEdit->setFont(newfont);
 
     ui->plainTextEdit->setPlainText(qstr);
@@ -189,7 +189,7 @@ void MainWindow::on_zoomIn_clicked()
     if(fontinfo.pointSize()<21){
         if(fontinfo.pointSize()==1) {
             QFont newfont(ui->plainTextEdit->font());
-            newfont.setLetterSpacing(QFont::PercentageSpacing, 200);
+            newfont.setLetterSpacing(QFont::PercentageSpacing, 250);
             ui->plainTextEdit->setFont(newfont);
         }
         ui->plainTextEdit->zoomIn();

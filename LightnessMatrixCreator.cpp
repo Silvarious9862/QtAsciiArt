@@ -14,7 +14,7 @@ Matrix<double> LightnessMatrixCreator::create()
             const auto lightness = FindPerceivedLightness(pixel.GetRed(),    // find lightness of pixel
                                                           pixel.GetGreen(),
                                                           pixel.GetBlue());
-            matrix(row, col) = lightness;             // set matrix of lightnesses
+            matrix(row, col) = std::max(lightness, 0.0);             // set matrix of lightnesses
         }
     }
     return matrix;

@@ -47,7 +47,7 @@ Matrix<char> LightnessToAscii(Matrix<double>& matrix, std::vector<char>& symbolA
         double current_pixel;
         for (int col = 0, pos = 0; col < matrix.getCols(); col++, pos = 0)    // for elems
         {
-            current_pixel = matrix(row, col);       
+            current_pixel = matrix(row, col);
             while(current_pixel>symbolVolume[pos])
                 pos++;
             matrix_ascii.push(row, col, symbolArray[pos]);      // add character to row
@@ -75,9 +75,14 @@ std::string MakeAsciiArt(std::string path, int quality, std::string symbols)
 
 
         // ------------- counting lightness -----------
+        ILightnessMatrixCreator* creator;
         LightnessMatrixCreator defaultCreator(image);
-        QualityDecorator qualityDecorator(defaultCreator, quality);
-        ILightnessMatrixCreator* creator = &qualityDecorator;
+        if (quality != 9) {
+            QualityDecorator qualityDecorator(defaultCreator, quality);
+            creator = &qualityDecorator;
+        } else {
+            creator = &defaultCreator;
+        }
         Matrix<double> matrix_avg = creator->create();
 
         // ------------- character selection --------------
